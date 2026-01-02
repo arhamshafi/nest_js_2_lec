@@ -22,12 +22,17 @@ let UserService = class UserService {
     constructor(UserModel) {
         this.UserModel = UserModel;
     }
-    getAllUser() {
-        return this.UserModel.find();
+    async getAllUser() {
+        const users = await this.UserModel.find();
+        return users;
     }
     async createUser(data) {
         await this.UserModel.create(data);
         return "successfully Added";
+    }
+    async del(id) {
+        await this.UserModel.findByIdAndDelete(id);
+        return "Successfully Deleted";
     }
 };
 exports.UserService = UserService;
